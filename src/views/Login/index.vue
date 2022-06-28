@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar title="登录">
-      <van-icon name="cross" slot="left" />
+      <van-icon name="cross" slot="left" @click-left="$router.go(-1)" />
     </van-nav-bar>
 
     <van-form @submit="onSubmit" ref="form">
@@ -64,7 +64,8 @@ export default {
       mobile: '13812345678',
       code: '246810',
       time: 5 * 1000,
-      isCountDownShow: false
+      isCountDownShow: false,
+      abc: []
     }
   },
   methods: {
@@ -72,6 +73,8 @@ export default {
       try {
         const res = await login(values)
         this.$store.commit('setUser', res.data.data)
+        this.$router.push({ name: 'my' })
+        console.log(this.abc)
       } catch (err) {
         console.log(err)
       }
